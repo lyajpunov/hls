@@ -1,0 +1,40 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>M3U8 Video Player with hls.js</title>  
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>  
+    <style>  
+        /* 可以通过CSS样式来设置video标签的宽高 */  
+        #videoPlayer {  
+            width: 640px;  
+            height: 360px;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <video id="videoPlayer" controls autoplay muted></video>  
+    <script>  
+        var video = document.getElementById('videoPlayer');  
+        var hls = new Hls();
+
+        function loadVideo() {
+            hls.loadSource('http://127.0.0.1:8080/video/lyj/main.m3u8'); // 替换为您的M3U8文件路径  
+            hls.attachMedia(video);  
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {  
+                video.play(); // 当流元数据加载完成后尝试播放视频  
+            });  
+        }
+
+        if (Hls.isSupported()) {  
+            loadVideo(); // 初始化加载视频  
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {  
+            // 如果浏览器原生支持HLS流，则直接使用原生播放器  
+            video.src = 'http://127.0.0.1:8080/video/lyj/main.m3u8'; // 替换为您的M3U8文件路径  
+            video.addEventListener('loadedmetadata', function() {  
+                video.play(); // 当视频元数据加载完成后尝试播放视频  
+            });  
+        }  
+    </script>  
+</body>  
+</html>
