@@ -1,4 +1,0 @@
-/home/lyj/hls/CMakeFiles/server.dir
-/home/lyj/hls/CMakeFiles/client.dir
-/home/lyj/hls/CMakeFiles/edit_cache.dir
-/home/lyj/hls/CMakeFiles/rebuild_cache.dir
